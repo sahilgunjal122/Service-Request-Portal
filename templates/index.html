@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Service Request Portal{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-white shadow-md">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a
+          href="{% url 'index_page' %}"
+          class="text-3xl font-extrabold text-blue-600 hover:text-blue-700 transition-all duration-300"
+        >
+          ⚡ Service Portal
+        </a>
+
+        <nav class="space-x-6 text-sm font-medium">
+          <a
+            href="{% url 'admin_dashboard' %}"
+            class="text-gray-700 hover:text-blue-600 transition duration-300"
+            >Admin Dashboard</a
+          >
+          <a
+            href="{% url 'submit_request' %}"
+            class="text-gray-700 hover:text-blue-600 transition duration-300"
+            >Submit Request</a
+          >
+          <a
+            href="{% url 'request_list' %}"
+            class="text-gray-700 hover:text-blue-600 transition duration-300"
+            >My Requests</a
+          >
+
+          {% if user.is_authenticated %}
+          <span class="text-gray-400">|</span>
+          <span class="text-gray-600">👤 {{ user.username }}</span>
+          <a
+            href="{% url 'logout' %}"
+            class="ml-2 text-red-500 hover:text-red-600 transition duration-300"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            href="{% url 'login' %}"
+            class="text-blue-500 hover:text-blue-600 hover:underline transition duration-300"
+            >Login</a
+          >
+          <a
+            href="{% url 'signup' %}"
+            class="ml-4 text-blue-500 hover:text-blue-600 hover:underline transition duration-300"
+            >Sign Up</a
+          >
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="px-6 py-12 flex-1 bg-white rounded-lg shadow-xl">
+      {% block content %}
+      <h2 class="text-4xl font-semibold text-gray-800 mb-6">
+        Welcome to Gas Utility Service Portal
+      </h2>
+
+      <p class="text-lg text-gray-600 mb-6">
+        Our gas utility company is currently addressing an increase in customer
+        service requests. To better serve you, we have developed this platform
+        to streamline support and improve your experience.
+      </p>
+
+      <h3 class="text-2xl font-semibold text-gray-800 mt-6 mb-3">
+        What You Can Do:
+      </h3>
+      <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600">
+        <li>📝 Submit service requests online easily</li>
+        <li>📊 Track the status of your requests in real-time</li>
+        <li>👤 View and manage your account information</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold text-gray-800 mt-6 mb-3">
+        For Customer Support Representatives:
+      </h3>
+      <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600">
+        <li>📁 Manage incoming service requests efficiently</li>
+        <li>💬 Provide timely and organized support to customers</li>
+      </ul>
+
+      <p class="text-lg text-gray-600 mt-6">
+        We are committed to improving your experience and reducing wait times.
+        Thank you for your patience!
+      </p>
+      {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-4 mt-12">
+      <p class="text-sm">
+        &copy; {% now "Y" %} Service Request Portal. All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{% extends "index.html" %} {% block title %}Submit Request{% endblock title %}
+{% block content %}
+<div class="max-w-3xl mx-auto">
+  <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+    📋 Submit a Service Request
+  </h2>
+
+  <form
+    action=""
+    method="POST"
+    enctype="multipart/form-data"
+    class="bg-gray-50 p-6 rounded-lg shadow-md space-y-4"
+  >
+    {% csrf_token %}
+    <div>
+      <label for="title" class="block text-gray-700 font-medium mb-1"
+        >Request Title</label
+      >
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Describe Your Issue"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+      />
+    </div>
+    <div>
+      <label for="description" class="block text-gray-700 font-medium mb-1"
+        >Description</label
+      >
+      <textarea
+        name="description"
+        id="description"
+        placeholder="Provide Detailed information about the problem"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+      ></textarea>
+    </div>
+    <div>
+      <label
+        for="attachment"
+        name="attachment"
+        id="attachment"
+        class="block text-gray-700 font-medium mb-1"
+        >Attach File(optional)</label
+      >
+      <input
+        type="File"
+        name="attachment"
+        id="attachment"
+        class="w-full text-gray-600"
+      />
+    </div>
+    <div>
+      <button
+        type="Submit"
+        class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}
