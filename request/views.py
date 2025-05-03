@@ -102,9 +102,14 @@ def update_request_status(request,pk):
     # Send Email Notification
         send_mail(
             subject='Service Request Status Updated',
-            message=f"Hello {service_request.user.username},\n\n"
-                    f"Your service request '{service_request.title}' is now marked as '{new_status}'.",
-            from_email='justusingforsomething@gmail.com',
+            message=f"Dear {service_request.user.username},\n\n"
+                    f"We would like to inform you that the status of your service request titled "
+                    f"'{service_request.title}' has been updated to: '{new_status}'.\n\n"
+                    f"If you have any questions or require further assistance, please don't hesitate to reach out to our support team.\n\n"
+                    f"Thank you for using our services.\n\n"
+                    f"Best regards,\n"
+                    f"The Gas Utility Service Team",
+            from_email='sahilgunjal122476@gmail.com',
             recipient_list=[service_request.user.email],
         )
         return redirect('admin_dashboard')
