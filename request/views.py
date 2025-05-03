@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from .models import ServiceRequest
 from .forms import ServiceRequestForm
 
+from django.core.mail import send_mail
+
 # Create your views here.
 
 @login_required
@@ -89,11 +91,22 @@ def admin_dashboard(request):
     return render(request,'admin_dashboard.html',{'requests':requests})
 
 def update_request_status(request,pk):
+     service_request = get_object_or_404(ServiceRequest, pk=pk)
+
      if request.method == 'POST':
         new_status = request.POST.get('status')
         request_obj = get_object_or_404(ServiceRequest, pk=pk)
         request_obj.status = new_status
         request_obj.save()
+     
+    # Send Email Notification
+        send_mail(
+            subject='Service Request Status Updated',
+            message=f"Hello {service_request.user.username},\n\n"
+                    f"Your service request '{service_request.title}' is now marked as '{new_status}'.",
+            from_email='justusingforsomething@gmail.com',
+            recipient_list=[service_request.user.email],
+        )
         return redirect('admin_dashboard')
 
 
