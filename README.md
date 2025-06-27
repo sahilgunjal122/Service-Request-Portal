@@ -21,8 +21,17 @@ Download django using pip
 ```bash
 sudo apt install python3-pip -y
 ```
+Create & Activate Virtual Environment
+```bash
+python -m venv venv
+venv\Scripts\activate  # On Windows
+```
 ```bash
 pip install django
+```
+pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
 ```
 Once you have downloaded django, go to the cloned repo directory and run the following command
 ```bash
@@ -43,5 +52,54 @@ Start the server by following command
 python3 manage.py runserver
 ```
 Once the server is hosted, head over to http://127.0.0.1:8000/Service-Request-Portal for the App.
+
+ 📎API Endpoints
+Token Authentication
+POST /api/token-auth/
+➤ Accepts username & password
+➤ Returns a token
+
+Public Endpoint
+GET /api/public/
+➤ Open to all
+
+Protected Endpoint
+GET /api/protected/
+➤ Requires token in headers
+➤ Returns current user's info
+
+🤖 Telegram Bot Integration
+Use @BotFather to create a bot
+
+Add token in telegram_bot.py
+
+Users who send /start will be saved into the database
+
+Manually Sync /start Users:
+```bash
+python manage.py shell
+>>> from request.telegram_bot import save_new_users
+>>> save_new_users()
+```
+📬 Email Notifications
+Sent after user registration
+
+Sent after admin updates request status
+
+Configured using Gmail SMTP
+
+🧠 Technologies Used
+Python 3.12
+
+Django 5.2
+
+Django REST Framework
+
+SQLite (local database)
+
+SMTP (Gmail)
+
+Telegram Bot API
+
 
 Cheers and Happy Coding :)
