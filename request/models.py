@@ -27,3 +27,12 @@ class ServiceRequest(models.Model):
     def __str__(self):
         return f"{self.title} by {self.user.username}"
     
+
+class TelegramUser(models.Model):
+    telegram_username = models.CharField(max_length=100)
+    telegram_id = models.CharField(max_length=50, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.telegram_username
+    

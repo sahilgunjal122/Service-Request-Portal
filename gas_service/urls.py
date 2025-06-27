@@ -17,7 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.authtoken.views import obtain_auth_token
+
+
+@api_view(['GET'])
+def hello_world(request):
+    return Response({"message": "Hello, world!"})
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('request.urls')),
+    path('api/hello/', hello_world),
+    path('api/token-auth/', obtain_auth_token),
 ]
